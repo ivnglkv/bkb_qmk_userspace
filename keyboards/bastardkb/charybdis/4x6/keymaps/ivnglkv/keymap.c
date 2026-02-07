@@ -22,6 +22,7 @@
 
 enum charybdis_keymap_layers {
     LAYER_BASE = 0,
+    LAYER_QWERTY,
     LAYER_LOWER,
     LAYER_RAISE,
     LAYER_POINTER,
@@ -46,6 +47,14 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define RAISE MO(LAYER_RAISE)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
+#define LSFT_TT LSFT_T(KC_T)
+#define LCTL_S MT(MOD_LCTL, KC_S)
+#define LALT_R MT(MOD_LALT, KC_R)
+#define LGUI_A MT(MOD_LGUI, KC_A)
+#define RSFT_N MT(MOD_RSFT, KC_N)
+#define RCTL_E MT(MOD_RCTL, KC_E)
+#define LALT_I MT(MOD_LALT, KC_I)
+#define RGUI_O MT(MOD_RGUI, KC_O)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -57,8 +66,23 @@ static uint16_t auto_pointer_layer_timer = 0;
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
+  // ╭──────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────╮
+       KC_TILD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
+  // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
+        KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,  KC_SCLN, KC_BSLS,
+  // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
+       KC_LSFT,  LGUI_A,  LALT_R,  LCTL_S, LSFT_TT,    KC_G,       KC_M,  RSFT_N,  RCTL_E,   LALT_I,  RGUI_O, KC_QUOT,
+  // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
+       KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, KC_RALT,
+  // ╰──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────╯
+                                   KC_LGUI, KC_SPC,   LOWER,      RAISE,  KC_ENT,
+                                           KC_LALT,  KC_DEL,    KC_BSPC
+  //                            ╰───────────────────────────╯ ╰──────────────────╯
+  ),
+
+  [LAYER_QWERTY] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
+       KC_TILD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -67,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                    KC_LGUI, KC_SPC,   LOWER,      RAISE,  KC_ENT,
-                                           KC_LALT, KC_BSPC,     KC_DEL
+                                           KC_LALT,  KC_DEL,    KC_BSPC
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -105,18 +129,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
        QK_BOOT,  EE_CLR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,  EE_CLR,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,    S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DPI_RMOD, S_D_RMOD,  S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, _______, DRGSCRL, SNIPING, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, SNIPING, DRGSCRL, _______, XXXXXXX,
+       XXXXXXX, _______, DRGSCRL, SNP_TOG, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, SNP_TOG, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                   KC_BTN2, KC_BTN1, KC_BTN3,    KC_BTN3, KC_BTN1,
                                            XXXXXXX, KC_BTN2,    KC_BTN2
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
+
 };
 // clang-format on
+const uint16_t PROGMEM qwerty_combo[] = {KC_BSPC, KC_DEL, COMBO_END};
+const uint16_t PROGMEM colemak_combo[] = {KC_LGUI, KC_ENT, COMBO_END};
+const uint16_t PROGMEM esc_combo[] = {KC_LALT, KC_SPC, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(qwerty_combo, DF(LAYER_QWERTY)),
+    COMBO(colemak_combo, DF(LAYER_BASE)),
+    COMBO(esc_combo, KC_ESC),
+};
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
