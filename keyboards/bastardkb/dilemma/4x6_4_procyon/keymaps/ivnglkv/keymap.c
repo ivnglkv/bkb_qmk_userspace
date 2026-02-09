@@ -121,6 +121,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format on
+const uint16_t PROGMEM qwerty_combo[] = {KC_BSPC, KC_DEL, COMBO_END};
+const uint16_t PROGMEM colemak_combo[] = {KC_LALT, KC_RALT, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(qwerty_combo, DF(LAYER_QWERTY)),
+    COMBO(colemak_combo, DF(LAYER_BASE)),
+};
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef DILEMMA_AUTO_SNIPING_ON_LAYER
