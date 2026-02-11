@@ -28,18 +28,14 @@ enum dilemma_keymap_layers {
 // Automatically enable sniping-mode on the pointer layer.
 // #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
+#define BASE DF(LAYER_BASE)
+#define QWERTY DF(LAYER_QWERTY)
 #define LOWER MO(LAYER_LOWER)
 #define RAISE MO(LAYER_RAISE)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
-#define LSFT_TT LSFT_T(KC_T)
-#define LCTL_S MT(MOD_LCTL, KC_S)
-#define LALT_R MT(MOD_LALT, KC_R)
-#define LGUI_A MT(MOD_LGUI, KC_A)
-#define RSFT_N MT(MOD_RSFT, KC_N)
-#define RCTL_E MT(MOD_RCTL, KC_E)
-#define LALT_I MT(MOD_LALT, KC_I)
-#define RGUI_O MT(MOD_RGUI, KC_O)
+#define RGUI_SC RGUI_T(KC_SCLN)
+
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -56,12 +52,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,  KC_SCLN, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
-         DT_UP,  LGUI_A,  LALT_R,  LCTL_S, LSFT_TT,    KC_G,       KC_M,  RSFT_N,  RCTL_E,   LALT_I,  RGUI_O, KC_QUOT,
+       CW_TOGG, G(KC_A), A(KC_R), C(KC_S), S(KC_T),    KC_G,       KC_M, S(KC_N), C(KC_E),  A(KC_I), G(KC_O), KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
-       DT_DOWN,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, DT_PRNT,
+        QWERTY,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, KC_RALT,
   // ╰──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────╯
-                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, KC_DEL,  KC_BSPC
-  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
+                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, RALT(KC_DEL),  KC_BSPC
+  //                    ╰───────────────────────────────────╯ ╰──────────────────────────────────────────╯
   ),
 
   [LAYER_QWERTY] = LAYOUT(
@@ -70,12 +66,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+       CW_TOGG, G(KC_A), A(KC_S), C(KC_D), S(KC_F),    KC_G,       KC_H, S(KC_J), C(KC_K), A(KC_L), RGUI_SC, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
+          BASE,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_RALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                         KC_LALT, KC_BSPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, KC_DEL,  KC_RALT
-  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
+                         KC_LALT, KC_BSPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, RALT(KC_DEL),  KC_BSPC
+  //                    ╰───────────────────────────────────╯ ╰─────────────────────────────────────────╯
   ),
 
   [LAYER_LOWER] = LAYOUT(
