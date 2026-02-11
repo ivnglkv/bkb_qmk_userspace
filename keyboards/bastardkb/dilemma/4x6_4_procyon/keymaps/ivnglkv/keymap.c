@@ -40,8 +40,6 @@ enum dilemma_keymap_layers {
 #define RCTL_E MT(MOD_RCTL, KC_E)
 #define LALT_I MT(MOD_LALT, KC_I)
 #define RGUI_O MT(MOD_RGUI, KC_O)
-#define DELMTU MT(QK_DYNAMIC_TAPPING_TERM_UP, KC_DEL)
-#define SPCMTD MT(QK_DYNAMIC_TAPPING_TERM_DOWN, KC_SPC)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -58,11 +56,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,  KC_SCLN, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
-       KC_LSFT,  LGUI_A,  LALT_R,  LCTL_S, LSFT_TT,    KC_G,       KC_M,  RSFT_N,  RCTL_E,   LALT_I,  RGUI_O, KC_QUOT,
+         DT_UP,  LGUI_A,  LALT_R,  LCTL_S, LSFT_TT,    KC_G,       KC_M,  RSFT_N,  RCTL_E,   LALT_I,  RGUI_O, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
-       KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, DT_PRNT,
+       DT_DOWN,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, DT_PRNT,
   // ╰──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────╯
-                          KC_ESC,  SPCMTD,  KC_SPC,   LOWER,      RAISE,  KC_ENT, DELMTU,  KC_BSPC
+                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, KC_DEL,  KC_BSPC
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
