@@ -37,4 +37,5 @@
 #undef RGBLIGHT_LED_COUNT
 #endif
 #define RGBLIGHT_LED_COUNT 104
-#define TAPPING_TERM 200
+
+#define TAPPING_TERM 250
