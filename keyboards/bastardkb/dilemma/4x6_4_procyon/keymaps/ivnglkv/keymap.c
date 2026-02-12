@@ -34,7 +34,26 @@ enum dilemma_keymap_layers {
 #define RAISE MO(LAYER_RAISE)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
-#define RGUI_SC RGUI_T(KC_SCLN)
+// Mod-Tap shortcuts Colemak
+#define MTG_A LGUI_T(KC_A)
+#define MTA_R LALT_T(KC_R)
+#define MTC_S LCTL_T(KC_S)
+#define MTS_T LSFT_T(KC_T)
+#define MTS_N LSFT_T(KC_N)
+#define MTC_E LCTL_T(KC_E)
+#define MTA_I LALT_T(KC_I)
+#define MTG_O RGUI_T(KC_O)
+// Mod-Tap shortcuts QWERTY
+#define MTA_S LALT_T(KC_S)
+#define MTC_D LCTL_T(KC_D)
+#define MTS_F LSFT_T(KC_F)
+#define MTS_J LSFT_T(KC_J)
+#define MTC_K LCTL_T(KC_K)
+#define MTA_L LALT_T(KC_L)
+#define MTG_SC RGUI_T(KC_SCLN)
+
+// Other Mod-Tap
+#define MTRA_DL RALT_T(KC_DEL)
 
 
 #ifndef POINTING_DEVICE_ENABLE
@@ -52,12 +71,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,  KC_SCLN, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
-       CW_TOGG, G(KC_A), A(KC_R), C(KC_S), S(KC_T),    KC_G,       KC_M, S(KC_N), C(KC_E),  A(KC_I), G(KC_O), KC_QUOT,
+       CW_TOGG,   MTG_A,   MTA_R,   MTC_S,   MTS_T,    KC_G,       KC_M,   MTS_N,   MTC_E,   MTA_I,    MTG_O, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
         QWERTY,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, KC_RALT,
   // ╰──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────╯
-                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, RALT(KC_DEL),  KC_BSPC
-  //                    ╰───────────────────────────────────╯ ╰──────────────────────────────────────────╯
+                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, MTRA_DL,  KC_BSPC
+  //                    ╰───────────────────────────────────╯ ╰────────────────────────────────────╯
   ),
 
   [LAYER_QWERTY] = LAYOUT(
@@ -66,12 +85,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       CW_TOGG, G(KC_A), A(KC_S), C(KC_D), S(KC_F),    KC_G,       KC_H, S(KC_J), C(KC_K), A(KC_L), RGUI_SC, KC_QUOT,
+       CW_TOGG,   MTG_A,   MTA_S,   MTC_D,   MTS_F,    KC_G,       KC_H,   MTS_J,   MTC_K,   MTA_L,  MTG_SC, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
           BASE,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_RALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, RALT(KC_DEL),  KC_BSPC
-  //                    ╰───────────────────────────────────╯ ╰─────────────────────────────────────────╯
+                          KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, MTRA_DL,  KC_BSPC
+  //                    ╰───────────────────────────────────╯ ╰────────────────────────────────────╯
   ),
 
   [LAYER_LOWER] = LAYOUT(
