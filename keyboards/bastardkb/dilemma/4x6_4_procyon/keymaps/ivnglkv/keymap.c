@@ -25,6 +25,11 @@ enum dilemma_keymap_layers {
     LAYER_POINTER,
 };
 
+enum my_keycodes {
+    SQWERTY = SAFE_RANGE,
+    SCOLMK,
+}
+
 // Automatically enable sniping-mode on the pointer layer.
 // #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
@@ -73,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
        CW_TOGG,   MTG_A,   MTA_R,   MTC_S,   MTS_T,    KC_G,       KC_M,   MTS_N,   MTC_E,   MTA_I,    MTG_O, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
-        QWERTY,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, KC_RALT,
+       SQWERTY,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, KC_RALT,
   // ╰──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────╯
                           KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, MTRA_DL,  KC_BSPC
   //                    ╰───────────────────────────────────╯ ╰────────────────────────────────────╯
@@ -87,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        CW_TOGG,   MTG_A,   MTA_S,   MTC_D,   MTS_F,    KC_G,       KC_H,   MTS_J,   MTC_K,   MTA_L,  MTG_SC, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-          BASE,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_RALT,
+        SCOLMK,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_RALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                           KC_ESC,  KC_SPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, MTRA_DL,  KC_BSPC
   //                    ╰───────────────────────────────────╯ ╰────────────────────────────────────╯
@@ -143,6 +148,25 @@ combo_t key_combos[] = {
     COMBO(qwerty_combo, DF(LAYER_QWERTY)),
     COMBO(colemak_combo, DF(LAYER_BASE)),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case SQWERTY:
+            if (record->event.pressed) {
+                tap_code(LCTL(KC_SPACE));
+                tap_code(DF(LAYER_QWERTY));
+            }
+            return false;
+        case SCOLMK:
+            if (record->event.pressed) {
+                tap_code(LCTL(KC_SPACE));
+                tap_code(DF(LAYER_BASE));
+            }
+            return false;
+        default:
+            return true;
+    }
+}
 
 #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 #ifdef POINTING_DEVICE_ENABLE
