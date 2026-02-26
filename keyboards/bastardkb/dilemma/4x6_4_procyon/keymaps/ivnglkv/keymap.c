@@ -28,7 +28,7 @@ enum dilemma_keymap_layers {
 enum my_keycodes {
     SQWERTY = SAFE_RANGE,
     SCOLMK,
-}
+};
 
 // Automatically enable sniping-mode on the pointer layer.
 // #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
@@ -141,26 +141,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format on
-const uint16_t PROGMEM qwerty_combo[] = {KC_BSPC, KC_DEL, COMBO_END};
-const uint16_t PROGMEM colemak_combo[] = {KC_LALT, KC_RALT, COMBO_END};
-
-combo_t key_combos[] = {
-    COMBO(qwerty_combo, DF(LAYER_QWERTY)),
-    COMBO(colemak_combo, DF(LAYER_BASE)),
-};
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SQWERTY:
             if (record->event.pressed) {
-                tap_code(LCTL(KC_SPACE));
-                tap_code(DF(LAYER_QWERTY));
+                register_code(KC_LCTL);
+                register_code(KC_SPACE);
+                wait_ms(100);
+                unregister_code(KC_LCTL);
+                unregister_code(KC_SPACE);
+                layer_move(LAYER_QWERTY);
             }
             return false;
         case SCOLMK:
             if (record->event.pressed) {
-                tap_code(LCTL(KC_SPACE));
-                tap_code(DF(LAYER_BASE));
+                register_code(KC_LCTL);
+                register_code(KC_SPACE);
+                wait_ms(100);
+                unregister_code(KC_LCTL);
+                unregister_code(KC_SPACE);
+                layer_move(LAYER_BASE);
             }
             return false;
         default:
