@@ -19,6 +19,7 @@
 
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
+    LAYER_QWERTY,
     LAYER_LOWER,
     LAYER_RAISE,
     LAYER_POINTER,
@@ -31,6 +32,14 @@ enum dilemma_keymap_layers {
 #define RAISE MO(LAYER_RAISE)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
+#define LSFT_TT LSFT_T(KC_T)
+#define LCTL_S MT(MOD_LCTL, KC_S)
+#define LALT_R MT(MOD_LALT, KC_R)
+#define LGUI_A MT(MOD_LGUI, KC_A)
+#define RSFT_N MT(MOD_RSFT, KC_N)
+#define RCTL_E MT(MOD_RCTL, KC_E)
+#define LALT_I MT(MOD_LALT, KC_I)
+#define RGUI_O MT(MOD_RGUI, KC_O)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -42,8 +51,22 @@ enum dilemma_keymap_layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
+  // ╭──────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────╮
+       KC_TILD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,     KC_0, KC_MINS,
+  // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
+        KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,  KC_SCLN, KC_BSLS,
+  // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
+       KC_LSFT,  LGUI_A,  LALT_R,  LCTL_S, LSFT_TT,    KC_G,       KC_M,  RSFT_N,  RCTL_E,  LALT_I,   RGUI_O, KC_QUOT,
+  // ├──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────┤
+       KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H, KC_COMM,   KC_DOT, PT_SLSH, KC_RALT,
+  // ╰──────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────╯
+                         KC_LALT, KC_BSPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT,  KC_DEL, KC_RALT
+  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
+  ),
+
+  [LAYER_QWERTY] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
+       KC_TILD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -51,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                         KC_LALT, KC_BSPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT, KC_DEL,  KC_MUTE
+                         KC_LALT, KC_BSPC,  KC_SPC,   LOWER,      RAISE,  KC_ENT,  KC_DEL, KC_RALT
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
@@ -91,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, _______, DRGSCRL, SNIPING, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, SNIPING, DRGSCRL, _______, XXXXXXX,
+       XXXXXXX, _______, DRGSCRL, SNP_TOG, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, SNP_TOG, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                          XXXXXXX, MS_BTN2, MS_BTN1, MS_BTN3,    MS_BTN3, MS_BTN1, MS_BTN2, XXXXXXX
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
